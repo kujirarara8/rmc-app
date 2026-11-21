@@ -11,7 +11,7 @@
   if(q==="inapp") isIOS=true;
   if(!q&&(standalone())) return;
   if(!q&&!isIOS&&!isAndroid) return;
-  try{var t=+localStorage.getItem(KEY)||0; if(!q&&Date.now()-t<7*86400000) return;}catch(_){}
+  var dismissed=false; try{dismissed=!q&&localStorage.getItem(KEY)==="1";}catch(_){}
 
   function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e;}
   var NS="http://www.w3.org/2000/svg";
@@ -22,7 +22,7 @@
   var card=el("div","card install");
   var head=el("div","chead"); head.appendChild(el("span",null,"ホーム画面に追加すると、アプリのように使えます"));
   var close=el("button","x","×"); close.type="button"; close.setAttribute("aria-label","閉じる");
-  close.addEventListener("click",function(){try{localStorage.setItem(KEY,String(Date.now()));}catch(_){} box.textContent="";});
+  close.addEventListener("click",function(){try{localStorage.setItem(KEY,"1");}catch(_){} mini();});
   head.appendChild(close); card.appendChild(head);
   card.appendChild(el("p","meta-l","タップするだけで開けます。下のリンクの帯も出なくなります。"));
   var btn=el("button","go",isAndroid?"ホーム画面に追加する":"追加の方法を見る"); btn.type="button"; card.appendChild(btn);
@@ -48,5 +48,12 @@
     steps.hidden=!steps.hidden; btn.textContent=steps.hidden?(isAndroid?"ホーム画面に追加する":"追加の方法を見る"):"手順をとじる";
   });
   steps.hidden=true;
-  box.appendChild(card);
+  function full(){try{localStorage.removeItem(KEY);}catch(_){} box.textContent=""; box.appendChild(card);}
+  function mini(){
+    box.textContent="";
+    var m=el("button","install-mini","ホーム画面に追加する方法"); m.type="button";
+    m.addEventListener("click",function(){full(); steps.hidden=false; btn.textContent="手順をとじる";});
+    box.appendChild(m);
+  }
+  if(dismissed) mini(); else box.appendChild(card);
 })();
