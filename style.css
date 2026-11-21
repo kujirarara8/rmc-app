@@ -93,3 +93,14 @@ main{padding:16px 20px 24px}
 .gate-box h1{font-size:22px;margin:2px 0 8px}
 body.locked .top,body.locked main,body.locked .tabs{visibility:hidden}
 :focus-visible{outline:2px solid var(--tint);outline-offset:2px}
+
+.install{background:var(--tint-bg);border-color:var(--tint-bg)}
+.install .chead{align-items:flex-start}
+.install .x{border:0;background:none;font-size:22px;line-height:1;color:var(--sub);cursor:pointer;min-width:44px;min-height:44px;margin:-10px -10px 0 0}
+.install .go{width:100%;border:0;font:inherit;font-size:15px;font-weight:700;cursor:pointer;margin-top:10px}
+.isteps{list-style:none;margin:12px 0 0;padding:0}
+.isteps[hidden]{display:none}
+.isteps li{display:flex;gap:10px;align-items:flex-start;padding:8px 0;font-size:14px}
+.isteps b{width:24px;height:24px;flex-shrink:0;border-radius:50%;background:var(--tint);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px}
+.sico{display:inline-flex;vertical-align:middle;margin-left:6px;width:26px;height:26px;border-radius:6px;background:#fff;align-items:center;justify-content:center}
+.sico svg{width:18px;height:18px;fill:none;stroke:var(--tint);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
