@@ -105,3 +105,9 @@ body.locked .top,body.locked main,body.locked .tabs{visibility:hidden}
 .sico{display:inline-flex;vertical-align:middle;margin-left:6px;width:26px;height:26px;border-radius:6px;background:#fff;align-items:center;justify-content:center}
 .sico svg{width:18px;height:18px;fill:none;stroke:var(--tint);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .install-mini{display:block;width:100%;border:1px dashed var(--line);border-radius:12px;background:#fff;color:var(--tint);font:inherit;font-size:13px;font-weight:700;min-height:44px;cursor:pointer}
+
+.next .bandrow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:4px}
+.next .bl{width:100%;font-size:12px;opacity:.9}
+.next .band{background:#fff;color:var(--tint);text-decoration:none;font-weight:700;font-size:13px;padding:0 14px;border-radius:10px;min-height:44px;display:flex;align-items:center}
+.events .bandcol{margin-left:auto;display:flex;flex-direction:column;gap:6px}
+.events .bandcol .zl{margin-left:0;min-height:36px;font-size:11px}

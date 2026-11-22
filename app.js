@@ -29,7 +29,12 @@
     nc.appendChild(el("p","dt",l.md+"（"+l.w+"）"+(next.time?" "+next.time+(next.end?"〜"+next.end:""):"")+"　担当："+next.who));
     if(next.note) nc.appendChild(el("p","nt",next.note));
     var z=zoomFor(next);
-    nc.appendChild(z?link("zoom","Zoomで参加する",z):el("span","zoom off","Zoomのリンクは、各部屋の案内で"));
+    if(z) nc.appendChild(link("zoom","Zoomで参加する",z));
+    else if(next.bands&&next.bands.length){
+      var bw=el("div","bandrow"); bw.appendChild(el("span","bl","Zoomは、自分の売上の部屋で"));
+      next.bands.forEach(function(k){var b=D.bandRooms[k]; if(b) bw.appendChild(link("band",b.label+"の部屋 ›",roomUrl(b.id)));});
+      nc.appendChild(bw);
+    } else nc.appendChild(el("span","zoom off","Zoomのリンクは、各部屋の案内で"));
   } else {
     nc.appendChild(el("p","tt","いまの予定はすべて終わりました"));
     nc.appendChild(el("p","nt","次の月の予定が決まったら載せます"));
@@ -101,6 +106,9 @@
     var b=el("div"); b.appendChild(el("div","t",e.title)); b.appendChild(el("div","s","担当："+e.who+(e.note?"　"+e.note:"")));
     li.appendChild(d); li.appendChild(b);
     var z=zoomFor(e); if(z) li.appendChild(link("zl","Zoom",z));
+    else if(e.bands&&e.bands.length&&endOf(e)>=now){
+      var bx=el("div","bandcol"); e.bands.forEach(function(k){var bb=D.bandRooms[k]; if(bb) bx.appendChild(link("zl",bb.label+"の部屋",roomUrl(bb.id)));}); li.appendChild(bx);
+    }
     ev.appendChild(li);
   });
 
