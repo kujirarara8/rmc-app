@@ -12,21 +12,22 @@
     document.dispatchEvent(new Event("rmc-auth"));
   }
   function h(tag,cls,text){var e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e;}
-  function panel(title,msg,btnText,onclick){
+  function panel(title,msg,btnText,onclick,asLink){
     var w=h("div","gate-box");
     w.appendChild(h("p","brand","REBEL MUSES CRAFT"));
     w.appendChild(h("h1",null,title));
     w.appendChild(h("p","meta-l",msg));
-    if(btnText){var b=h("button","btn",btnText);b.type="button";b.addEventListener("click",onclick);w.appendChild(b);}
+    if(btnText&&asLink){var a=h("a","btn",btnText);a.href=authUrl();w.appendChild(a);}  // リンクにしておくと、スマホでDiscordアプリが入っていればアプリで開ける
+    else if(btnText){var b=h("button","btn",btnText);b.type="button";b.addEventListener("click",onclick);w.appendChild(b);}
     return w;
   }
   function redirectUri(){return location.origin+location.pathname;}
-  function login(){
-    var u="https://discord.com/oauth2/authorize?client_id="+encodeURIComponent(A.clientId)+
+  function authUrl(){
+    return "https://discord.com/oauth2/authorize?client_id="+encodeURIComponent(A.clientId)+
       "&response_type=token&scope="+encodeURIComponent("identify guilds.members.read")+
       "&redirect_uri="+encodeURIComponent(redirectUri())+"&prompt=none";
-    location.href=u;
   }
+  function login(){location.href=authUrl();}
   function loadSess(){try{var s=JSON.parse(localStorage.getItem(KEY)||"null");return s&&s.exp>Date.now()?s:null;}catch(_){return null;}}
   function saveSess(s){try{localStorage.setItem(KEY,JSON.stringify(s));}catch(_){}}
   function logout(){try{localStorage.removeItem(KEY);}catch(_){} location.href=location.pathname;}
@@ -46,12 +47,12 @@
       .then(function(m){
         var need=A.requiredRoleIds||[];
         var ok=!need.length||need.some(function(id){return (m.roles||[]).indexOf(id)>=0;});
-        if(!ok){show(panel("メンバー用のページです","RMCのメンバーとして確認できませんでした。入会・退会に変更があった場合は、公式LINEからお知らせください。","やり直す",login));return;}
+        if(!ok){show(panel("メンバー用のページです","RMCのメンバーとして確認できませんでした。入会・退会に変更があった場合は、公式LINEからお知らせください。","やり直す",login,true));return;}
         var name=m.nick||(m.user&&(m.user.global_name||m.user.username))||"";
         var s={name:name,roles:m.roles||[],exp:Date.now()+(A.recheckDays||3)*DAY};
         saveSess(s);location.replace(location.pathname);
       })
-      .catch(function(){show(panel("メンバー用のページです","RMCのDiscordサーバーに入っている人だけが使えます。確認できませんでした。","やり直す",login));});
+      .catch(function(){show(panel("メンバー用のページです","RMCのDiscordサーバーに入っている人だけが使えます。確認できませんでした。","やり直す",login,true));});
     return;
   }
   var s=loadSess();
@@ -59,5 +60,5 @@
   // ホーム画面のアプリとして開いている時：iPhoneでは、Discordの確認から元のアプリに戻れない（保存場所が別になる）ため、ログインなしで表示する
   var standalone=(window.matchMedia&&window.matchMedia("(display-mode: standalone)").matches)||window.navigator.standalone===true;
   if(standalone){unlock(null);return;}
-  show(panel("RMCアプリ","Discordでログインすると、予定・日報・月報が使えます。RMCのメンバー専用です。","Discordでログイン",login));
+  show(panel("RMCアプリ","Discordでログインすると、予定・日報・月報が使えます。RMCのメンバー専用です。","Discordでログイン",login,true));
 })();
