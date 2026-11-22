@@ -22,11 +22,13 @@
 
   // 次の予定
   var nc=document.getElementById("next-card"), next=events.filter(function(e){return endOf(e)>=now;})[0];
-  nc.appendChild(el("p","lab","次の予定"));
   if(next){
-    var l=label(next.date);
-    nc.appendChild(el("p","tt",next.title));
-    nc.appendChild(el("p","dt",l.md+"（"+l.w+"）"+(next.time?" "+next.time+(next.end?"〜"+next.end:""):"")+"　担当："+next.who));
+    var l=label(next.date), np=next.date.split("-");
+    var nh=el("div","nhead"), nd=el("div","nd"); nd.appendChild(el("small",null,(+np[1])+"月")); nd.appendChild(el("b",null,String(+np[2]))); nh.appendChild(nd);
+    var nb=el("div","nb"); nb.appendChild(el("p","lab","次の予定"));
+    nb.appendChild(el("p","tt",next.title));
+    nb.appendChild(el("p","dt",l.w+"曜日"+(next.time?"　"+next.time+(next.end?"〜"+next.end:""):"")+"　担当："+next.who));
+    nh.appendChild(nb); nc.appendChild(nh);
     if(next.note) nc.appendChild(el("p","nt",next.note));
     var z=zoomFor(next);
     if(z) nc.appendChild(link("zoom","Zoomで参加する",z));
@@ -36,6 +38,7 @@
       nc.appendChild(bw);
     } else nc.appendChild(el("span","zoom off","Zoomのリンクは、各部屋の案内で"));
   } else {
+    nc.appendChild(el("p","lab","次の予定"));
     nc.appendChild(el("p","tt","いまの予定はすべて終わりました"));
     nc.appendChild(el("p","nt","次の月の予定が決まったら載せます"));
   }
@@ -45,9 +48,12 @@
   function isNew(a){return (now-new Date(a.posted+"T00:00:00"))/86400000<=7;}
   function archiveRow(a){
     var li=el("li"), k=link("",""  ,a.url);
-    var d=el("span","hash",md(a.date)); d.style.fontSize="12px"; k.appendChild(d);
+    var th=el("span","thumb");
+    var ph=el("span","ph"); var pp=a.date.split("-"); ph.appendChild(el("span",null,(+pp[1])+"/"+(+pp[2]))); ph.appendChild(el("small",null,"RMC")); th.appendChild(ph);
+    if(a.yt){var im=document.createElement("img"); im.alt=""; im.loading="lazy"; im.decoding="async"; im.src="https://i.ytimg.com/vi/"+a.yt+"/mqdefault.jpg"; im.addEventListener("error",function(){im.remove();}); th.appendChild(im);}
+    th.appendChild(el("span","pl")); k.appendChild(th);
     var box=el("span"); var b=el("b",null,a.title); box.appendChild(b);
-    if(isNew(a)) box.appendChild(el("small",null,"新着　"+md(a.posted)+"に届きました")); else box.appendChild(el("small",null,"録画を見る"));
+    var sm=el("small"); if(isNew(a)) sm.appendChild(el("span","new","新着")); sm.appendChild(document.createTextNode(md(a.date)+" の授業")); box.appendChild(sm);
     k.appendChild(box); li.appendChild(k); return li;
   }
   var ac=document.getElementById("archive-card"), ah=el("div","chead"); ah.appendChild(el("span",null,"最新のアーカイブ"));
@@ -55,7 +61,7 @@
   ac.appendChild(ah);
   var aul=el("ul","rows"); D.archives.slice(0,3).forEach(function(a){aul.appendChild(archiveRow(a));}); ac.appendChild(aul);
   var aall=document.getElementById("archive-all"); D.archives.forEach(function(a){aall.appendChild(archiveRow(a));});
-  var more=el("li"); more.appendChild(link("","Discordのアーカイブ部屋を開く",roomUrl(D.archivesRoom))); aall.appendChild(more);
+  var more=el("li"); more.appendChild(link("more-link","Discordのアーカイブ部屋を開く ›",roomUrl(D.archivesRoom))); aall.appendChild(more);
 
   // 作業会・朝夜活のいま
   var wc=document.getElementById("worknow-card"), wh=el("div","chead"); wh.appendChild(el("span",null,"作業会のいま")); wh.appendChild(el("span","when",md(D.workNow.asOf)+"時点")); wc.appendChild(wh);
@@ -120,7 +126,7 @@
   mc.appendChild(card);
 
   // 画面の切り替え
-  var titles={home:"ホーム",chat:"チャット",board:"掲示板",schedule:"スケジュール",meta:"メタ空間",geppo:"月報を出す"};
+  var titles={home:"",chat:"チャット",board:"お知らせ・アーカイブ",schedule:"スケジュール",meta:"メタ空間",geppo:"月報を出す"};
   var TABS=["home","chat","board","schedule","meta"], ALL=TABS.concat(["geppo"]), from="home";
   function go(id){
     ALL.forEach(function(k){document.getElementById(k).hidden=(k!==id);});
@@ -134,5 +140,5 @@
   }
   document.querySelectorAll("[data-go]").forEach(function(b){b.addEventListener("click",function(){go(b.dataset.go);});});
   document.querySelectorAll("[data-back]").forEach(function(b){b.addEventListener("click",function(){go(from);});});
-  var h=(location.hash||"").slice(1); if(titles[h]) go(h);
+  var h=(location.hash||"").slice(1); if(h&&titles.hasOwnProperty(h)) go(h);
 })();

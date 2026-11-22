@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#fdfdfb">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="RMC">
 <link rel="manifest" href="manifest.webmanifest">
@@ -15,15 +15,13 @@
 <body>
 <div id="gate" class="gate" hidden></div>
 <header class="top">
-  <div>
-    <p class="brand">RMC</p>
-    <h1 id="screen-title">ホーム</h1>
-    <p class="hello" id="hello"></p>
-  </div>
-  <button type="button" class="bell" data-go="board" aria-label="お知らせ"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg></button>
+  <p class="brand">RMC</p>
+  <button type="button" class="bell" data-go="board" aria-label="お知らせ"></button>
 </header>
+<p class="hello" id="hello"></p>
 
 <main>
+  <h1 class="stitle" id="screen-title"></h1>
   <section id="home" class="screen">
     <div id="install-card"></div>
     <div class="next" id="next-card"></div>

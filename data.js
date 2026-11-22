@@ -29,17 +29,17 @@ window.RMC = {
     { tag: "月報", title: "11月分の月報は11/25スタート", body: "締切は12/5です。月報会でその場で書いて出せます。" },
     { tag: "募集", title: "10万円達成した先輩に聞いてみたいこと", body: "1つ上の売上帯の人に聞きたいことを募集しています。" }
   ],
-  // 最新のアーカイブ（新しい順）。date＝授業の日、posted＝Discordに出した日。Discordのアーカイブ部屋と同じものを入れる
+  // 最新のアーカイブ（新しい順）。yt＝YouTube動画ID（サムネ用。無いものは日付のカードが出る）。date＝授業の日、posted＝Discordに出した日。Discordのアーカイブ部屋と同じものを入れる
   archivesRoom: "1400788451900526702",
   archives: [
     { date: "2026-11-19", posted: "2026-11-20", title: "おとよ ストーリーズ添削会", url: "https://utage-system.com/members/yHt4Gm9Qmskm/course/3JrVuvRfDNQi/lesson/oVFSaVlbA1Pe" },
     { date: "2026-11-17", posted: "2026-11-17", title: "おとよ授業「AIで仕事を減らす」", url: "https://utage-system.com/members/yHt4Gm9Qmskm/course/oD0BVKOUNDfc/lesson/8SLdX8j7IHeE" },
-    { date: "2026-11-11", posted: "2026-11-12", title: "はな 添削会", url: "https://utage-system.com/members/yHt4Gm9Qmskm/course/3JrVuvRfDNQi/lesson/enfRCVqVpPQp" },
-    { date: "2026-11-10", posted: "2026-11-12", title: "ふみや 特別授業【カメラ授業】", url: "https://utage-system.com/members/yHt4Gm9Qmskm/course/zwBYntmgUROM/lesson/q8IpFiGATrEc" },
-    { date: "2026-11-04", posted: "2026-11-07", title: "はな 全体授業「その場で1ヶ月シートを作る会」", url: "https://utage-system.com/members/yHt4Gm9Qmskm/course/3JrVuvRfDNQi/lesson/yQBoADrEcqBM" },
+    { date: "2026-11-11", posted: "2026-11-12", title: "はな 添削会", yt: "cJ_WV6SmWck", url: "https://utage-system.com/members/yHt4Gm9Qmskm/course/3JrVuvRfDNQi/lesson/enfRCVqVpPQp" },
+    { date: "2026-11-10", posted: "2026-11-12", title: "ふみや 特別授業【カメラ授業】", yt: "ztdmdVt93hw", url: "https://utage-system.com/members/yHt4Gm9Qmskm/course/zwBYntmgUROM/lesson/q8IpFiGATrEc" },
+    { date: "2026-11-04", posted: "2026-11-07", title: "はな 全体授業「その場で1ヶ月シートを作る会」", yt: "FXmSr_BC798", url: "https://utage-system.com/members/yHt4Gm9Qmskm/course/3JrVuvRfDNQi/lesson/yQBoADrEcqBM" },
     { date: "2026-11-03", posted: "2026-11-05", title: "しほ 授業「繁忙期の前にこれだけは直して」", url: "https://utage-system.com/members/yHt4Gm9Qmskm/course/0IcwNX4Sq9j6/lesson/XE5M9APXZfvN" },
-    { date: "2026-10-27", posted: "2026-10-28", title: "jiaiみこ 特別授業「行動できない時に考えてみてほしいこと」", url: "https://utage-system.com/members/yHt4Gm9Qmskm/course/zwBYntmgUROM/lesson/ZiEOpup40KIv" },
-    { date: "2026-10-15", posted: "2026-10-15", title: "はな 添削会", url: "https://utage-system.com/members/yHt4Gm9Qmskm/course/3JrVuvRfDNQi/lesson/JEkZmQGgHAkq" },
+    { date: "2026-10-27", posted: "2026-10-28", title: "jiaiみこ 特別授業「行動できない時に考えてみてほしいこと」", yt: "pVieT_mybjo", url: "https://utage-system.com/members/yHt4Gm9Qmskm/course/zwBYntmgUROM/lesson/ZiEOpup40KIv" },
+    { date: "2026-10-15", posted: "2026-10-15", title: "はな 添削会", yt: "C352ocNh8ck", url: "https://utage-system.com/members/yHt4Gm9Qmskm/course/3JrVuvRfDNQi/lesson/JEkZmQGgHAkq" },
     { date: "2026-10-13", posted: "2026-10-14", title: "おとよ 添削会", url: "https://utage-system.com/members/yHt4Gm9Qmskm/course/3JrVuvRfDNQi/lesson/Vn6uIqn161BT" },
     { date: "2026-10-12", posted: "2026-10-14", title: "あやの 特別授業", url: "https://utage-system.com/members/yHt4Gm9Qmskm/course/zwBYntmgUROM/lesson/E81owZbz2uSI" }
   ],
