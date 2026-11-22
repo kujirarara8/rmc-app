@@ -56,5 +56,8 @@
   }
   var s=loadSess();
   if(s){unlock(s);return;}
+  // ホーム画面のアプリとして開いている時：iPhoneでは、Discordの確認から元のアプリに戻れない（保存場所が別になる）ため、ログインなしで表示する
+  var standalone=(window.matchMedia&&window.matchMedia("(display-mode: standalone)").matches)||window.navigator.standalone===true;
+  if(standalone){unlock(null);return;}
   show(panel("RMCアプリ","Discordでログインすると、予定・日報・月報が使えます。RMCのメンバー専用です。","Discordでログイン",login));
 })();
