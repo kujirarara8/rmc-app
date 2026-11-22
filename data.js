@@ -63,7 +63,7 @@ window.RMC = {
   ],
   guild: "1400630282964701254",
   // Discordでログイン。clientIdが空のあいだは、ログインなしで表示される（開発中）
-  auth: { clientId: "", requiredRoleIds: [], recheckDays: 3 },
+  auth: { clientId: "1573892854823256085", requiredRoleIds: [], recheckDays: 3 },
   community: [
     { kind: "discord", label: "Discord", url: "https://discord.com/channels/1400630282964701254", note: "質問・雑談・月報の提出はこちら", button: "Discordを開く" },
     { kind: "meta", label: "作業場（メタ作業会）", url: "https://metalife-space.onrender.com/", note: "黙々と作業しても、おしゃべりしながらでもOK。夜23:00から、1回30人まで。日程は決まり次第ここに載せます", button: "メタ空間に入る" }
